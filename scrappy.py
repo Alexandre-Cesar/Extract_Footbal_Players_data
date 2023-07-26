@@ -46,18 +46,4 @@ class Scrapper():
 
         return players_list
     
-
-    def MakeDict(self, num_inicial, num_final):
-
-        columns = self.makeCols()
-        rows = self.makeContent(num_inicial, num_final) 
-        dicionario = {}
-        n = len(columns)
-
-        splited = [rows[i::n] for i in range(n)]
-
-        for i in range(0, 35):
-            dicionario[columns[i]] = splited[i]
-
-        return dicionario
     
