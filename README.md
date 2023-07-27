@@ -35,7 +35,7 @@ Utilize os métodos makeCols(), makeContent() e createDict() para obter os dados
 
 ### Obter os dados de uma faixa de linhas
     dados_dict = scrapper.createDict(first_row=0, last_row=100)
-
+ 
 ### Imprimir o dicionário com os dados
     print(dados_dict)
 
