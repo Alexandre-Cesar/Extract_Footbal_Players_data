@@ -15,9 +15,9 @@ class Scrapper():
     def makeCols(self) :
 
         header = self.soup.find('thead')
-        titulos = header.find_all('tr')
-        cols = titulos[1].find_all('th')
-        cols.pop()
+        titles = header.find_all('tr')
+        cols = titles[1].find_all('th')
+        cols.pop() 
         cols.pop(0)
         num_cols = len(cols)
 
@@ -35,30 +35,30 @@ class Scrapper():
         players_list = []
         table = self.soup.find('tbody')
         rows = table.find_all('tr')
-        num = len(self.makeCols())
-        
+        content_rows = [tr_tag for tr_tag in rows if 'class="thead"' not in tr_tag]
 
-        for number in range(25, 2775, 25):
-            rows.pop(number)
         
         for i in range(num_inicial, num_final):
-            jogador = rows[i].find_all('td')
+            player = content_rows[i].find_all('td')
+            if len(player) > 0:
+                player.pop()
+            num = len(player)
             
             for j in range(0, num):
-                player_stats = jogador[j].get_text().strip()
+                player_stats = player[j].get_text().strip()
                 players_list.append(player_stats)
 
         return players_list
     
-    def createDict(self, num_inicial, num_final):
+    def createDict(self, first_row, last_row):
         columns = self.makeCols()
-        rows = self.makeContent(num_inicial, num_final) 
-        dicionario = {}
+        rows = self.makeContent(first_row, last_row)
+        data = {}
         n = len(columns)
 
         splited = [rows[i::n] for i in range(n)]
 
         for i in range(0, n):
-            dicionario[columns[i]] = splited[i]
+            data[columns[i]] = splited[i]
 
-        return dicionario   
+        return data   
