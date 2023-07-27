@@ -16,12 +16,15 @@ class Scrapper():
 
         header = self.soup.find('thead')
         titulos = header.find_all('tr')
-        Titulos = titulos[1].find_all('th')
+        cols = titulos[1].find_all('th')
+        cols.pop()
+        cols.pop(0)
+        num_cols = len(cols)
 
 
         list_columns =[]
-        for a in range(1, 36):
-            status = Titulos[a].get_text().strip()
+        for a in range(0, num_cols):
+            status = cols[a].get_text().strip()
             list_columns.append(status)
 
         return  list_columns
@@ -32,6 +35,7 @@ class Scrapper():
         players_list = []
         table = self.soup.find('tbody')
         rows = table.find_all('tr')
+        num = len(self.makeCols())
         
 
         for number in range(25, 2775, 25):
@@ -40,10 +44,21 @@ class Scrapper():
         for i in range(num_inicial, num_final):
             jogador = rows[i].find_all('td')
             
-            for j in range(0, 35):
+            for j in range(0, num):
                 player_stats = jogador[j].get_text().strip()
                 players_list.append(player_stats)
 
         return players_list
     
-    
+    def createDict(self, num_inicial, num_final):
+        columns = self.makeCols()
+        rows = self.makeContent(num_inicial, num_final) 
+        dicionario = {}
+        n = len(columns)
+
+        splited = [rows[i::n] for i in range(n)]
+
+        for i in range(0, n):
+            dicionario[columns[i]] = splited[i]
+
+        return dicionario   
