@@ -1,6 +1,7 @@
 # Web Scraping de Página de Futebol
 
-Este é um projeto de web scraping em Python para extrair dados de uma página de futebol. Ele utiliza as bibliotecas `requests` e `BeautifulSoup` para obter e analisar o conteúdo HTML da página.
+Este é um projeto de web scraping em Python para extrair dados de jogadores do site fbref. Ele utiliza as bibliotecas `requests` e `BeautifulSoup` para obter e analisar o conteúdo HTML da página.  
+Link: https://fbref.com/en/comps/Big5/stats/players/Big-5-European-Leagues-Stats
 
 ## Como usar
 
@@ -23,8 +24,7 @@ link = 'https://fbref.com/en/comps/Big5/stats/players/Big-5-European-Leagues-Sta
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
 scrapper = Scrapper(link, headers) 
-```
-
+```  
 
 ## Obtendo os dados:
 
